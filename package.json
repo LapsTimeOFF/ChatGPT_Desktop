@@ -18,6 +18,7 @@
     "e2e": "npx playwright test"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.12",
     "@playwright/test": "^1.29.2",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
@@ -35,5 +36,10 @@
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.11.7"
   }
 }

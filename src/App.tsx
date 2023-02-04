@@ -1,14 +1,12 @@
-import { useState } from 'react'
-import './App.scss'
-
-console.log('[App.tsx]', `Hello world from Electron ${process.versions.electron}!`)
+import { Container, Typography } from "@mui/material";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <p>Yay</p>
+    <Container>
+      <img src={"https://raw.githubusercontent.com/twitter/twemoji/master/assets/svg/1f95c.svg"} />
+      <Typography>Peanut</Typography>
+    </Container>
   );
 }
 
-export default App
+export default App;

@@ -2,28 +2,22 @@
  * @see https://www.electron.build/configuration/configuration
  */
 {
-  "appId": "YourAppID",
+  "appId": "ChatGPT_Desktop",
   "asar": true,
   "directories": {
     "output": "release/${version}"
   },
-  "files": [
-    "dist-electron",
-    "dist"
-  ],
+  "files": ["dist-electron", "dist"],
   "mac": {
     "artifactName": "${productName}_${version}.${ext}",
-    "target": [
-      "dmg"
-    ]
+    "target": ["dmg"],
+    "identity": null
   },
   "win": {
     "target": [
       {
         "target": "nsis",
-        "arch": [
-          "x64"
-        ]
+        "arch": ["x64"]
       }
     ],
     "artifactName": "${productName}_${version}.${ext}"
