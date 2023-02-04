@@ -5,7 +5,7 @@
   "appId": "ChatGPT_Desktop",
   "asar": true,
   "directories": {
-    "output": "release/${version}"
+    "output": "release/"
   },
   "files": ["dist-electron", "dist"],
   "mac": {
