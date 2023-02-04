@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.scss";
 import ChatMessage from "./ChatMessage";
 
@@ -6,20 +6,36 @@ function App() {
   const [messages, setMessages] = useState<any>([
     { ai: true, message: "Hi! How can I help you today?" },
   ]);
-  const [input, setInput] = useState<string>('');
+  const [input, setInput] = useState<string>("");
 
-  const addMessage = ({ai, message}: {ai: boolean, message: string}) => {
-    setMessages((prevState: any) => ([...prevState, { ai, message }]));
-  }
+  const addMessage = ({ ai, message }: { ai: boolean; message: string }) => {
+    setMessages((prevState: any) => [...prevState, { ai, message }]);
+  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log("Submit");
 
     addMessage({ ai: false, message: input });
-    setInput('');
-    console.log(messages)
-    addMessage({ ai: true, message: input });
+
+    const msg = [
+      "You're an AI named ChatGPT, here is the disscution, give me a response to the last message of the user. Nothing else.",
+    ];
+
+    console.log(messages);
+
+    for (const key in [...messages, { ai: false, message: input }]) {
+      let _ = [...messages, { ai: false, message: input }][key];
+      msg.push(`${_.ai ? "ChatGPT (you) : " : "The user : "}${_.message}`);
+    }
+
+    setInput("");
+
+    console.log(msg.join("\n"));
+
+    const res = await window.ChatGPT_API.sendMessage(msg.join("\n")); 
+
+    addMessage({ ai: true, message: res.text });
   };
 
   return (
@@ -44,7 +60,12 @@ function App() {
         </div>
         <div className="chat-input-holder">
           <form onSubmit={handleSubmit}>
-            <input className="chat-input-textarea" id="text-input" value={input} onChange={(e) => setInput(e.target.value)}></input>
+            <input
+              className="chat-input-textarea"
+              id="text-input"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+            ></input>
           </form>
         </div>
       </section>

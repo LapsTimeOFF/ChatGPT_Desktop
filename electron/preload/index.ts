@@ -90,3 +90,12 @@ window.onmessage = (ev) => {
 }
 
 setTimeout(removeLoading, 4999)
+
+import { ipcRenderer } from "electron"
+
+export const api = {
+  sendMessage: (msg: string) => ipcRenderer.invoke('sendChatGPT', msg)
+};
+// @ts-ignore
+window.ChatGPT_API = api;
+// contextBridge.exposeInMainWorld('ChatGPT_API', api)

@@ -24,6 +24,7 @@
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.0.1",
+    "dotenv": "^16.0.3",
     "electron": "^22.0.3",
     "electron-builder": "^23.6.0",
     "esbuild": "^0.17.5",
@@ -42,6 +43,9 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.11.7",
+    "@waylaidwanderer/chatgpt-api": "^1.7.2",
+    "chatgpt": "^4.1.1",
+    "isomorphic-fetch": "^3.0.0",
     "jquery": "^3.6.3"
   }
 }
