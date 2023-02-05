@@ -108,7 +108,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Build/release Electron app linux/x64
-        run: pnpm build
+        run: pnpm build --publish always
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -144,7 +144,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Build/release Electron app win32/x64
-        run: pnpm build
+        run: pnpm build --publish always
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -182,7 +182,7 @@ jobs:
       - run: pnpm add dmg-builder dmg-license
 
       - name: Build/release Electron app darwin/universal
-        run: pnpm build
+        run: pnpm build --publish always
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
