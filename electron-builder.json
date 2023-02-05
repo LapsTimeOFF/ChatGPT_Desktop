@@ -7,6 +7,10 @@
   "directories": {
     "output": "release/"
   },
+  "publish": {
+    "provider": "github",
+    "releaseType": "draft"
+  },
   "files": ["dist-electron", "dist"],
   "mac": {
     "artifactName": "${productName}_${version}.${ext}",
