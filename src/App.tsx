@@ -2,23 +2,16 @@ import { useEffect, useState } from "react";
 import "./App.scss";
 import ChatMessage from "./ChatMessage";
 
+import { Link } from "react-router-dom";
+
 function App() {
-  const [apiKey, setApiKey] = useState<any>('');
   const [messages, setMessages] = useState<any>([
     { ai: true, message: "Hi! How can I help you today?" },
   ]);
   const [input, setInput] = useState<string>("");
 
-  useEffect(() => {
-    async function fetchData() {
-      const result = await window.Config_API.getKey("openai.api_key");
-      setApiKey(result);
-    }
-    fetchData();
-  }, []);
-
-  const addMessage = ({ ai, message }: { ai: boolean; message: string }) => {
-    setMessages((prevState: any) => [...prevState, { ai, message }]);
+  const addMessage = ({ ai, message, error }: { ai: boolean; message: string, error?: boolean }) => {
+    setMessages((prevState: any) => [...prevState, { ai, message, error }]);
   };
 
   const handleSubmit = async (e: any) => {
@@ -42,9 +35,15 @@ function App() {
 
     // console.log(msg.join("\n"));
 
-    const res = await window.ChatGPT_API.sendMessage(msg.join("\n"));
+    try {
+      const res = await window.ChatGPT_API.sendMessage(msg.join("\n"));
+      console.log(res)
+      addMessage({ ai: true, message: res.text });
+    } catch (error) {
+      addMessage({ ai: true, message: `An error as occured.\n\n${error}`, error: true });
+      console.error(error);
+    }
 
-    addMessage({ ai: true, message: res.text });
   };
 
   const handleNewChat = () => {
@@ -58,14 +57,10 @@ function App() {
           <span>+</span>
           New Chat
         </div>
-        <input
-          type="text"
-          placeholder="OpenAI API KEY"
-          className="side-menu-button"
-          value={apiKey}
-          onChange={(e) => {setApiKey(e.target.value); window.Config_API.setKey('openai.api_key', e.target.value)}}
-          style={{ backgroundColor: "#202123", color: "white", outline:"none" }}
-        />
+        <br />
+        <Link to="/settings" style={{ color: "white", textDecoration: "none" }}>
+          <div className="side-menu-button">Settings</div>
+        </Link>
       </aside>
       <section className="chatbox">
         <div className="chat-log">
@@ -74,6 +69,7 @@ function App() {
               <ChatMessage
                 ai={Message.ai}
                 message={Message.message}
+                error={Message.error}
                 key={index}
               />
             );

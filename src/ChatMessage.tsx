@@ -1,6 +1,6 @@
 import React from "react";
 
-const ChatMessage = ({ ai, message }: { ai: boolean; message: string }) => {
+const ChatMessage = ({ ai, message, error }: { ai: boolean; message: string, error?: boolean }) => {
   return (
     <div className={`chat-message ${ai ? "chatgpt" : ""}`}>
       <div className="chat-message-center">
@@ -19,7 +19,14 @@ const ChatMessage = ({ ai, message }: { ai: boolean; message: string }) => {
             />
           </svg> : <p></p>}
         </div>
-        <div className="message">{message}</div>
+        <div className="message">{message.split('\n').map((str: string, _: number) => {
+          return (
+            <div key={_}>
+            <span style={{color: error ? 'red' : 'white'}} key={_}>{str}</span>
+            <br key={str+'.'}/>
+            </div>
+          );
+        })}</div>
       </div>
     </div>
   );
