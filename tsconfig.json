@@ -22,6 +22,6 @@
       ]
     },
   },
-  "include": ["src", "electron/preload/index.d.ts"],
+  "include": ["src", "electron/preload/index.d.ts", "electron/main/unfetch"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

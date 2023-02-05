@@ -3,7 +3,7 @@
  */
 {
   "appId": "ChatGPT_Desktop",
-  // "asar": true,
+  "asar": false,
   "directories": {
     "output": "release/"
   },

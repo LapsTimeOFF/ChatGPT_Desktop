@@ -64,7 +64,7 @@ function App() {
           className="side-menu-button"
           value={apiKey}
           onChange={(e) => {setApiKey(e.target.value); window.Config_API.setKey('openai.api_key', e.target.value)}}
-          style={{ backgroundColor: "#202123", color: "white" }}
+          style={{ backgroundColor: "#202123", color: "white", outline:"none" }}
         />
       </aside>
       <section className="chatbox">
