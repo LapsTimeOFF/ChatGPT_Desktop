@@ -7,7 +7,6 @@ import {
 } from "electron";
 import { release } from "node:os";
 import { join } from "node:path";
-import "isomorphic-fetch";
 
 import Store from "electron-store";
 
@@ -24,8 +23,8 @@ import Store from "electron-store";
 process.env.DIST_ELECTRON = join(__dirname, "../");
 process.env.DIST = join(process.env.DIST_ELECTRON, "../dist");
 process.env.PUBLIC = process.env.VITE_DEV_SERVER_URL
-  ? join(process.env.DIST_ELECTRON, "../public")
-  : process.env.DIST;
+? join(process.env.DIST_ELECTRON, "../public")
+: process.env.DIST;
 
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith("6.1")) app.disableHardwareAcceleration();
@@ -42,6 +41,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const handleSendChatGPT = async (event: IpcMainInvokeEvent, msg: string) => {
+  await import("isomorphic-fetch");
   const { ChatGPTAPI } = await import("chatgpt");
 
   const api = new ChatGPTAPI({
