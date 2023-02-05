@@ -33,15 +33,19 @@ function App() {
 
     console.log(msg.join("\n"));
 
-    const res = await window.ChatGPT_API.sendMessage(msg.join("\n")); 
+    const res = await window.ChatGPT_API.sendMessage(msg.join("\n"));
 
     addMessage({ ai: true, message: res.text });
+  };
+
+  const handleNewChat = () => {
+    setMessages([{ ai: true, message: "Hi! How can I help you today?" }]);
   };
 
   return (
     <div className="App">
       <aside className="sidemenu">
-        <div className="side-menu-button">
+        <div className="side-menu-button" onClick={handleNewChat}>
           <span>+</span>
           New Chat
         </div>
