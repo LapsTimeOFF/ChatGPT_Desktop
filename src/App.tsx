@@ -3,10 +3,19 @@ import "./App.scss";
 import ChatMessage from "./ChatMessage";
 
 function App() {
+  const [apiKey, setApiKey] = useState<any>('');
   const [messages, setMessages] = useState<any>([
     { ai: true, message: "Hi! How can I help you today?" },
   ]);
   const [input, setInput] = useState<string>("");
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await window.Config_API.getKey("openai.api_key");
+      setApiKey(result);
+    }
+    fetchData();
+  }, []);
 
   const addMessage = ({ ai, message }: { ai: boolean; message: string }) => {
     setMessages((prevState: any) => [...prevState, { ai, message }]);
@@ -14,7 +23,7 @@ function App() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log("Submit");
+    // console.log("Submit");
 
     addMessage({ ai: false, message: input });
 
@@ -22,7 +31,7 @@ function App() {
       "You're an AI named ChatGPT, here is the disscution, give me a response to the last message of the user. Nothing else.",
     ];
 
-    console.log(messages);
+    // console.log(messages);
 
     for (const key in [...messages, { ai: false, message: input }]) {
       let _ = [...messages, { ai: false, message: input }][key];
@@ -31,7 +40,7 @@ function App() {
 
     setInput("");
 
-    console.log(msg.join("\n"));
+    // console.log(msg.join("\n"));
 
     const res = await window.ChatGPT_API.sendMessage(msg.join("\n"));
 
@@ -49,6 +58,14 @@ function App() {
           <span>+</span>
           New Chat
         </div>
+        <input
+          type="text"
+          placeholder="OpenAI API KEY"
+          className="side-menu-button"
+          value={apiKey}
+          onChange={(e) => {setApiKey(e.target.value); window.Config_API.setKey('openai.api_key', e.target.value)}}
+          style={{ backgroundColor: "#202123", color: "white" }}
+        />
       </aside>
       <section className="chatbox">
         <div className="chat-log">

@@ -7,7 +7,9 @@ import {
 } from "electron";
 import { release } from "node:os";
 import { join } from "node:path";
-import 'isomorphic-fetch';
+import "isomorphic-fetch";
+
+import Store from "electron-store";
 
 // The built directory structure
 //
@@ -22,8 +24,8 @@ import 'isomorphic-fetch';
 process.env.DIST_ELECTRON = join(__dirname, "../");
 process.env.DIST = join(process.env.DIST_ELECTRON, "../dist");
 process.env.PUBLIC = process.env.VITE_DEV_SERVER_URL
-? join(process.env.DIST_ELECTRON, "../public")
-: process.env.DIST;
+  ? join(process.env.DIST_ELECTRON, "../public")
+  : process.env.DIST;
 
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith("6.1")) app.disableHardwareAcceleration();
@@ -43,7 +45,7 @@ const handleSendChatGPT = async (event: IpcMainInvokeEvent, msg: string) => {
   const { ChatGPTAPI } = await import("chatgpt");
 
   const api = new ChatGPTAPI({
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey: store.get('openai.api_key').toString(),
   });
 
   return await api.sendMessage(msg);
@@ -60,8 +62,28 @@ const preload = join(__dirname, "../preload/index.js");
 const url = process.env.VITE_DEV_SERVER_URL;
 const indexHtml = join(process.env.DIST, "index.html");
 
+const store = new Store();
+
+const handleGetConfigKey = (event: IpcMainInvokeEvent, key: string) => {
+  return store.get(key);
+};
+const handleSetConfigKey = (
+  event: IpcMainInvokeEvent,
+  key: string,
+  value: any
+) => {
+  return store.set(key, value);
+};
+const handleDeleteConfigKey = (event: IpcMainInvokeEvent, key: string) => {
+  return store.delete(key);
+};
+
 async function createWindow() {
   ipcMain.handle("sendChatGPT", handleSendChatGPT);
+
+  ipcMain.handle("getConfigKey", handleGetConfigKey);
+  ipcMain.handle("setConfigKey", handleSetConfigKey);
+  ipcMain.handle("deleteConfigKey", handleDeleteConfigKey);
 
   win = new BrowserWindow({
     title: "Main window",

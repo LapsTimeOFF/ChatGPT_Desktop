@@ -45,6 +45,7 @@
     "@mui/material": "^5.11.7",
     "@waylaidwanderer/chatgpt-api": "^1.7.2",
     "chatgpt": "^4.1.1",
+    "electron-store": "^8.1.0",
     "isomorphic-fetch": "^3.0.0",
     "jquery": "^3.6.3"
   }

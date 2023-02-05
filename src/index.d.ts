@@ -1,7 +1,8 @@
-import { api } from "../electron/preload/index";
+import { ChatGPT_API, Config_API } from "../electron/preload/index";
 export {};
 declare global {
   interface Window {
-    ChatGPT_API: typeof api;
+    ChatGPT_API: typeof ChatGPT_API;
+    Config_API: typeof Config_API;
   }
 }
