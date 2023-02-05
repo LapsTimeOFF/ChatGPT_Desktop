@@ -29,7 +29,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/LapsTimeOFF/ChatGPT_Desktop">
-    <img src="http://lapstimevpn.chickenkiller.com:3001/RIMA4/LUmiZEPe15.png/raw" alt="Logo" width="512" height="512">
+    <img src="http://lapstimevpn.chickenkiller.com:3001/RIMA4/LUmiZEPe15.png/raw" alt="Logo" width="192" height="192">
   </a>
 
 <h3 align="center">ChatGPT Desktop</h3>
