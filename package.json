@@ -1,6 +1,6 @@
 {
   "name": "chatgpt_desktop",
-  "version": "1.0",
+  "version": "1.0.0",
   "main": "dist-electron/main/index.js",
   "description": "Interact with ChatGPT on your desktop!",
   "author": "LapsTime",
