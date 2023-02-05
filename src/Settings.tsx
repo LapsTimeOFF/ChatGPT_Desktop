@@ -29,7 +29,7 @@ const Settings = () => {
       </p>
       <input
           type="text"
-          placeholder="OpenAI API KEY"
+          placeholder="sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
           className="side-menu-button"
           value={apiKey}
           onChange={(e) => {
