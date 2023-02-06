@@ -10,7 +10,15 @@ function App() {
   ]);
   const [input, setInput] = useState<string>("");
 
-  const addMessage = ({ ai, message, error }: { ai: boolean; message: string, error?: boolean }) => {
+  const addMessage = ({
+    ai,
+    message,
+    error,
+  }: {
+    ai: boolean;
+    message: string;
+    error?: boolean;
+  }) => {
     setMessages((prevState: any) => [...prevState, { ai, message, error }]);
   };
 
@@ -37,13 +45,16 @@ function App() {
 
     try {
       const res = await window.ChatGPT_API.sendMessage(msg.join("\n"));
-      console.log(res)
+      console.log(res);
       addMessage({ ai: true, message: res.text });
     } catch (error) {
-      addMessage({ ai: true, message: `An error as occured.\n\n${error}`, error: true });
+      addMessage({
+        ai: true,
+        message: `An error as occured.\n\n${error}`,
+        error: true,
+      });
       console.error(error);
     }
-
   };
 
   const handleNewChat = () => {
