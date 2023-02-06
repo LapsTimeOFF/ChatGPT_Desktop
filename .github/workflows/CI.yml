@@ -82,7 +82,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-  make-linux:
+  build-linux:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[NO-BUILD]')"
     needs: tests
@@ -118,7 +118,7 @@ jobs:
           name: build
           path: |
             release/**/*.AppImage
-  make-windows:
+  build-windows:
     runs-on: windows-latest
     if: "!contains(github.event.head_commit.message, '[NO-BUILD]')"
     needs: tests
@@ -154,7 +154,7 @@ jobs:
           name: build
           path: |
             release/*.exe
-  make-macos:
+  build-macos:
     runs-on: macos-12
     if: "!contains(github.event.head_commit.message, '[NO-BUILD]')"
     needs: tests
