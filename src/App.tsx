@@ -95,6 +95,7 @@ function App() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
             ></textarea>
+            <input type="submit" value="Submit" className="chat-input-textarea" />
           </form>
         </div>
       </section>
